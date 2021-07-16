@@ -1,0 +1,30 @@
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+button {
+  width: 200px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.red {
+  color: white;
+  background: red;
+}
+.blue {
+  color: white;
+  background: blue;
+}
+.green {
+  color: white;
+  background: green;
+}
+@media screen and (max-width: 768px) {
+  button {
+    width: 70px;
+  }
+}

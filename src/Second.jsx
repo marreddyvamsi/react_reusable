@@ -1,21 +1,23 @@
 import React, { Component } from "react";
 import Button from "./components/Button";
 import "./App.css";
-class App extends Component {
+import colors from "./utils";
+
+class Second extends Component {
   constructor(props) {
     super(props);
     this.state = { color: "" };
   }
   onclickhandler = (e) => {
     let val = e.target.textContent;
-    if (val === "Reset") {
+    if (val === "reset") {
       document.getElementById("cl").textContent = "";
       return this.setState({ color: "" });
     }
     this.setState({ color: val });
     document.getElementById(
       "cl"
-    ).textContent = `Color changed to ${val.toUpperCase()}`;
+    ).textContent = `color changed to ${val.toUpperCase()}`;
   };
   render() {
     return (
@@ -31,17 +33,19 @@ class App extends Component {
           </div>
         </div>
         <div className="row">
-          <Button text="Red" className="red" onClick={this.onclickhandler} />
-          <Button text="Blue" className="blue" onClick={this.onclickhandler} />
-          <Button
-            text="Green"
-            className="green"
-            onClick={this.onclickhandler}
-          />
-          <Button text="Reset" onClick={this.onclickhandler} />
+          {colors.map((item) => {
+            return (
+              <Button key={item.color}
+                text={item.color}
+                className={item.color}
+                onClick={this.onclickhandler}
+              />
+            );
+          })}
+          <Button text="reset" onClick={this.onclickhandler}/>
         </div>
       </>
     );
   }
 }
-export default App;
+export default Second;
