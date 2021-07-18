@@ -1,33 +1,23 @@
 import React, { Component } from "react";
 import Button from "./components/Button";
 import "./App.css";
+import { connect } from "react-redux";
+
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { color: "" };
-  }
   onclickhandler = (e) => {
+    const { dispatch } = this.props;
     let val = e.target.textContent;
-    if (val === "Reset") {
-      document.getElementById("cl").textContent = "";
-      return this.setState({ color: "" });
-    }
-    this.setState({ color: val });
-    document.getElementById(
-      "cl"
-    ).textContent = `Color changed to ${val.toUpperCase()}`;
+    dispatch({ type: "CHANGECOLOR", payload: { val } });
   };
   render() {
+    const { color } = this.props;
     return (
       <>
         <div className="center">
           <div>
             <p>Click on buttons to change Color</p>
-            <p id="cl"></p>
-            <div
-              className="color"
-              style={{ background: `${this.state.color}` }}
-            ></div>
+            <p id="cl">Color changed to {color}</p>
+            <div className="color" style={{ background: `${color}` }}></div>
           </div>
         </div>
         <div className="row">
@@ -44,4 +34,9 @@ class App extends Component {
     );
   }
 }
-export default App;
+
+const mapStateToProps = (store) => {
+  console.log(store);
+  return { color: store.color };
+};
+export default connect(mapStateToProps, null)(App);
